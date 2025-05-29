@@ -7,6 +7,7 @@
 bool is_meow_installed(void) {
     char* cmd = "pm list packages </dev/null 2>&1 | cat | grep -q meow.helper";
     if (system(cmd) == 0) {
+        printf("meow.helper is installed!\n");
         return true;
     } else {
         return false;
@@ -21,6 +22,7 @@ bool is_logd_dead(void) {
     } else {
         if (errno == ENOENT) {
             // Logd socket does not exist (logd is dead!)
+            printf("Logd socket is missing!\n");
             return true;
         } else {
             // Permission denied or other errors (running on unprivileged env)
