@@ -65,6 +65,7 @@ int main(void) {
 ## 🙀 **The Bigger Picture**
 This repo isn’t *just* code. It’s a **public service announcement**:
 > **Dear modders**: If your "stealth" & "performance optimization" tactic involves breaking core OS functions, prepare yourself from being roasted 🔥.
+>
 > **Dear users**: If a module has `stop logd` in its codebase or empty file named logd, run. 🏃💨
 
 --- 
