@@ -1,0 +1,39 @@
+name: Build Meowna Detector
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/build.yml'
+      - 'jni/**'
+
+# Allow only one concurrent build workflows
+concurrency:
+  group: build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build with NDK
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: NDK Setup
+      uses: nttld/setup-ndk@v1
+      with:
+        ndk-version: r28b
+
+    - name: Build NDK
+      run: ndk-build
+
+    - name: Upload executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: meowna_detector
+        path: libs
