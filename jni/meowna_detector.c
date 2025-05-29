@@ -2,6 +2,16 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <stdlib.h>
+
+bool is_meow_installed(void) {
+    char* cmd = "pm list packages </dev/null 2>&1 | cat | grep -q meow.helper";
+    if (system(cmd) == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 bool is_logd_dead(void) {
     struct stat st;
@@ -20,7 +30,7 @@ bool is_logd_dead(void) {
 }
 
 int main(void) {
-    if (is_logd_dead()) {
+    if (is_logd_dead() || is_meow_installed()) {
         printf("Meowna detected 🔥🗑️🚮\n");
         return 1;
     } else {
